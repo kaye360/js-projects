@@ -17,6 +17,8 @@ body {
 }
 
 #tictactoe {
+  position : relative;
+  z-index: 1;
   border : 1px solid #bbb;
 }
 
@@ -40,4 +42,56 @@ body {
   height : 100px;
   border : 1px solid #bbb;
   outline : 0;
+  font-size : 2rem;
 }
+
+.already-played {
+  animation: already-played 500ms ease-in-out both;
+}
+
+@keyframes already-played {
+  from {
+    background-color: hsl(0, 96%, 67%);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+
+#line {
+  position : absolute;
+  bottom : 0;
+  left : 2%;
+  z-index : 10;
+  width : 95%;
+  height : 10px;
+  background-color: red;
+  border-radius: 0.5rem;
+  display : none;
+
+  transform-origin: center;
+  animation : line 1s ease-in-out;
+}
+
+@keyframes line {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.line-visible { display : block !important }
+
+.line-r1 { transform: translateY(-15.5rem); }
+.line-r2 { transform: translateY(-9rem); }
+.line-r3 { transform: translateY(-3rem); }
+
+.line-c1 { transform: rotate(90deg) translateX(-9rem) translateY(6.5rem); }
+.line-c2 { transform: rotate(90deg) translateX(-9rem) translateY(0rem); }
+.line-c3 { transform: rotate(90deg) translateX(-9rem) translateY(-6.5rem); }
+
+.line-tl-br { transform: translateY(-9rem) rotate(45deg) scale(1.2) }
+.line-tr-bl { transform: translateY(-9rem) rotate(-45deg) scale(1.2) }

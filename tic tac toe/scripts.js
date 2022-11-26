@@ -3,7 +3,8 @@
 class tictactoe {
 
   resetBtn
-  turn = 'x'
+  line
+  turn = 'X'
   gameWrapper
   gameBoard
   gameStatus
@@ -12,11 +13,12 @@ class tictactoe {
 
   constructor(gameWrapper, gameBoard) {
 
+    this.resetBtn = document.getElementById('reset-game')
+    this.gameStatus = document.getElementById('game-status')
+    this.line = document.getElementById('line')
     this.gameWrapper = document.getElementById(gameWrapper)
     this.gameBoard = document.getElementById(gameBoard)
-    this.resetBtn = document.getElementById('reset-game')
     this.resetBtn.addEventListener('click', () => this.reset())
-    this.gameStatus = document.getElementById('game-status')
     this.render()
   }
 
@@ -26,9 +28,9 @@ class tictactoe {
 
     // If square has already been played
     if(this.sqaureValues[sqaureIndex]) {
-      console.log('already played')
+
+      this.warnAlreadyPlayed(sqaureIndex)
       
-      // Else square hasn't been played
     } else {
       
       this.sqaureValues[sqaureIndex] = this.turn
@@ -44,8 +46,10 @@ class tictactoe {
 
 
 
-  toggleTurn() {
-    this.turn = this.turn === 'x' ? '0' : 'x'
+  warnAlreadyPlayed(index) {
+    const gameSquares = document.querySelectorAll('.game-square')
+    gameSquares[index].classList.add('already-played')
+    setTimeout( () => gameSquares[index].classList.remove('already-played') , 500)
   }
 
 
@@ -65,6 +69,8 @@ class tictactoe {
   }
 
 
+
+
   generateSquares() {
     this.sqaureValues.forEach( square => {
 
@@ -74,16 +80,25 @@ class tictactoe {
   }
 
 
+
+
+
   reset() {
     this.clearBoard()
+    this.line.removeAttribute('class')
     this.sqaureValues = new Array(9).fill(false)
     this.render()
     this.setGameStatus('Game in progress')
   }
   
+
+
+
   clearBoard() {
     this.gameBoard.innerHTML = ''
   }
+
+  
 
 
   setGameStatus(status) {
@@ -91,11 +106,20 @@ class tictactoe {
   }
 
 
+
+  toggleTurn() {
+    this.turn = this.turn === 'X' ? 'O' : 'X'
+  }
+
+
+
   render() {
     this.clearBoard()
     this.generateSquares()
     if(!this.isGameOver()) this.addClickEvents()
   }
+
+
 
   completeGame(winner) {
     if(winner === 'tie') {
@@ -117,6 +141,7 @@ class tictactoe {
       this.sqaureValues[0] === this.sqaureValues[1] &&
       this.sqaureValues[1] === this.sqaureValues[2]
     ) {
+      this.line.classList.add('line-visible', 'line-r1')
       return this.sqaureValues[0]
     }
     
@@ -126,37 +151,41 @@ class tictactoe {
       this.sqaureValues[5] &&
       this.sqaureValues[3] === this.sqaureValues[4] &&
       this.sqaureValues[4] === this.sqaureValues[5]
-    ) {
-      return this.sqaureValues[3]
-    }
-
-    // bottom row
-    if(this.sqaureValues[6] && 
+      ) {
+        this.line.classList.add('line-visible', 'line-r2')
+        return this.sqaureValues[3]
+      }
+      
+      // bottom row
+      if(this.sqaureValues[6] && 
       this.sqaureValues[7] && 
       this.sqaureValues[8] &&
       this.sqaureValues[6] === this.sqaureValues[7] &&
       this.sqaureValues[7] === this.sqaureValues[8]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-r3')
       return this.sqaureValues[6]
     }
-
+    
     // left row
     if(this.sqaureValues[0] && 
       this.sqaureValues[3] && 
       this.sqaureValues[6] &&
       this.sqaureValues[0] === this.sqaureValues[3] &&
       this.sqaureValues[3] === this.sqaureValues[6]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-c1')
       return this.sqaureValues[0]
     }
-
+    
     // middle row (vertical)
     if(this.sqaureValues[1] && 
       this.sqaureValues[4] && 
       this.sqaureValues[7] &&
       this.sqaureValues[1] === this.sqaureValues[4] &&
       this.sqaureValues[4] === this.sqaureValues[7]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-c2')
       return this.sqaureValues[1]
     }
 
@@ -166,27 +195,30 @@ class tictactoe {
       this.sqaureValues[8] &&
       this.sqaureValues[2] === this.sqaureValues[5] &&
       this.sqaureValues[5] === this.sqaureValues[8]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-c3')
       return this.sqaureValues[2]
     }
-
+    
     // top left to bottom right row
     if(this.sqaureValues[0] && 
       this.sqaureValues[4] && 
       this.sqaureValues[8] &&
       this.sqaureValues[0] === this.sqaureValues[4] &&
       this.sqaureValues[4] === this.sqaureValues[8]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-tl-br')
       return this.sqaureValues[0]
     }
-
+    
     // top right to bottom left row
     if(this.sqaureValues[2] && 
       this.sqaureValues[4] && 
       this.sqaureValues[6] &&
       this.sqaureValues[2] === this.sqaureValues[4] &&
       this.sqaureValues[4] === this.sqaureValues[6]
-    ) {
+      ) {
+      this.line.classList.add('line-visible', 'line-tr-bl')
       return this.sqaureValues[2]
     }
 
