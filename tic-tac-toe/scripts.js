@@ -2,13 +2,13 @@
 
 class tictactoe {
 
-  resetBtn
-  line
-  turn = 'X'
-  gameWrapper
-  gameBoard
-  gameStatus
-  sqaureValues = new Array(9).fill(false)
+  resetBtn // HTML button element to reset the game
+  line // HTML line element that shows up when a game is won
+  turn = 'X' // X starts first I guess
+  gameWrapper // HTML wrapper element for everything
+  gameBoard // Tic tac toe area
+  gameStatus // HTML element showing game status
+  sqaureValues = new Array(9).fill(false) // Initial array of values in sqaures
 
 
   constructor(gameWrapper, gameBoard) {
@@ -22,37 +22,34 @@ class tictactoe {
     this.render()
   }
 
-
-
+  // 
+  // toggle an individual square to X or O
   toggleGameSquare(sqaureIndex) {
 
     // If square has already been played
     if(this.sqaureValues[sqaureIndex]) {
-
       this.warnAlreadyPlayed(sqaureIndex)
-      
-    } else {
-      
-      this.sqaureValues[sqaureIndex] = this.turn
-      this.toggleTurn()
-      this.render()
-
-      const isGameOver = this.isGameOver()
-      if (isGameOver) this.completeGame(isGameOver)
+      return
     }
+      
+    this.sqaureValues[sqaureIndex] = this.turn
+    this.toggleTurn()
+    this.render()
 
-
+    const isGameOver = this.isGameOver()
+    if (isGameOver) this.completeGame(isGameOver)
   }
 
-
-
+  // 
+  // Warn that a square has already been played
   warnAlreadyPlayed(index) {
     const gameSquares = document.querySelectorAll('.game-square')
     gameSquares[index].classList.add('already-played')
     setTimeout( () => gameSquares[index].classList.remove('already-played') , 500)
   }
 
-
+  // 
+  // Add click events for each square
   addClickEvents() {
     const gameSquares = document.querySelectorAll('.game-square')
     gameSquares.forEach( (square, index) => {
@@ -60,7 +57,8 @@ class tictactoe {
     })
   }
   
-  
+  // 
+  // remove click events. called when game is complete
   removeClickEvents() {
     const gameSquares = document.querySelectorAll('.game-square')
     gameSquares.forEach( square => {
@@ -68,9 +66,8 @@ class tictactoe {
     } )
   }
 
-
-
-
+  // 
+  // Generate the squares for the game
   generateSquares() {
     this.sqaureValues.forEach( square => {
 
@@ -79,10 +76,8 @@ class tictactoe {
     })
   }
 
-
-
-
-
+  // 
+  // Reset the game
   reset() {
     this.clearBoard()
     this.line.removeAttribute('class')
@@ -91,36 +86,34 @@ class tictactoe {
     this.setGameStatus('Game in progress')
   }
   
-
-
-
+  // 
+  // Clear the entire board. used for re-rendering
   clearBoard() {
     this.gameBoard.innerHTML = ''
   }
 
-  
-
-
+  // 
+  // Change the game Status
   setGameStatus(status) {
     this.gameStatus.innerHTML = status
   }
 
-
-
+  // 
+  // Take turns, its only fair
   toggleTurn() {
     this.turn = this.turn === 'X' ? 'O' : 'X'
   }
 
-
-
+  // 
+  // Render the game
   render() {
     this.clearBoard()
     this.generateSquares()
     if(!this.isGameOver()) this.addClickEvents()
   }
 
-
-
+  // 
+  // Complete the game
   completeGame(winner) {
     if(winner === 'tie') {
       this.setGameStatus('Game Over - Tie')
@@ -128,10 +121,12 @@ class tictactoe {
       this.setGameStatus(`Player ${winner} won!!`)
     }
     this.removeClickEvents()
-
   }
 
-
+  // 
+  // Check if the game is over (a line is made by a player)
+  // Return the winning player or false
+  // I feel like there may be a better way to do this. maybe not?
   isGameOver() {
 
     // top row
