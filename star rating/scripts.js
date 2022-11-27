@@ -1,71 +1,112 @@
 "use strict"
+/*
 
+Created by Josh - joshkaye.ca
+Simple Star Rating component that can be reused multiple times
+simply create a new instance with a corresponding star container element and wrapper element
 
-const starRating = document.querySelector('.star-rating')
-const wrapper = document.querySelector('.wrapper')
-let starBtns = NodeList
-let totalRating = new Array(5).fill(false)
-let defaultRating = 0 
+JS:
+  window.onload = () => {
+    const ratingStars1 = new RatingStars('star-rating1', 'wrapper1')
+    const ratingStars2 = new RatingStars('star-rating2', 'wrapper2')
+  }
+HTML:
+  <div class="wrapper1">
+    <div class="star-rating1"></div>
+  </div>
 
+  <div class="wrapper2">
+    <div class="star-rating2"></div>
+  </div>
+*/
 
-function initStars() {
-  totalRating.forEach( () => {
+class RatingStars {
+
+  starRating // HTML element container for stars
+  wrapper // HTML element that wraps starRating
+  starBtns = NodeList // Node list of each star <button>
+  totalRating = new Array(5).fill(false) // set the default array
+  defaultRating = 0 // set default rating
+  
+  // 
+  // StarRating is the Inner Element that displays stars
+  // Wrapper is the outer element
+  constructor(starRating, wrapper) {
+    this.starRating = document.querySelector(`.${starRating}`)
+    this.wrapper = document.querySelector(`.${wrapper}`)
+
+    this.initStars()
+    this.fillStars()
+    this.addStarEvents()
+    this.addWrapperEvents()
+  }
+
+// 
+// Load the star <button>s into the DOM with event listener
+initStars() {
+  this.totalRating.forEach( () => {
     const btn = document.createElement('button')
     btn.classList.add('star-btn')
     btn.setAttribute('type', 'button')
-    starRating.append(btn)
+    this.starRating.append(btn)
   })
 
-  starBtns = document.querySelectorAll('.star-btn')
-  starBtns.forEach( (btn, index) => {
-    btn.addEventListener('click', () => setDefaultRating(index) )
-  })
-}
-
-function setDefaultRating(index) {
-  defaultRating = index + 1
-}
-
-function fillStars() {
-  totalRating.forEach( (star, index) => {
-    starBtns[index].classList.remove('star-empty')
-    starBtns[index].classList.remove('star-full')
-    if (!star) starBtns[index].classList.add('star-empty')
-    if (star) starBtns[index].classList.add('star-full')
+  this.starBtns = this.starRating.querySelectorAll('.star-btn')
+  this.starBtns.forEach( (btn, index) => {
+    btn.addEventListener('click', () => this.setDefaultRating(index) )
   })
 }
 
-function addStarEvents() {
-  const stars = document.querySelectorAll('.star-btn')
+// 
+// Set the default rating
+setDefaultRating(index) {
+  this.defaultRating = index + 1
+}
+
+// 
+// take the values in this.totalRating [] and render Stars accordingly
+// ex: true, true, true, false false = 3/5 stars
+fillStars() {
+  this.totalRating.forEach( (star, index) => {
+    this.starBtns[index].classList.remove('star-empty')
+    this.starBtns[index].classList.remove('star-full')
+    if (!star) this.starBtns[index].classList.add('star-empty')
+    if (star) this.starBtns[index].classList.add('star-full')
+  })
+}
+
+// 
+// Add hover event listener to each star
+addStarEvents() {
+  const stars = this.starRating.querySelectorAll('.star-btn')
   stars.forEach( (star, index) => {
-    star.addEventListener('mouseover', () => hoverStars(index))
+    star.addEventListener('mouseover', () => this.hoverStars(index))
   })
 }
 
-function hoverStars(index) {
-
-  // Make whole array false
-  totalRating.fill(false)
-  // make array true index + 1 
-  totalRating.fill(true, 0, index + 1)
-  // Reload
-  fillStars()
+// 
+// Hover event listener for a star
+hoverStars(index) {
+  this.totalRating.fill(false)
+  this.totalRating.fill(true, 0, index + 1)
+  this.fillStars()
 }
 
-function addWrapperEvents() {
-  wrapper.addEventListener('mouseleave', () => {
-    totalRating.fill(false)
-    defaultRating !== 0 && totalRating.fill(true, 0, defaultRating)
-    fillStars()
+// 
+// Add mouseleave and click event to this.wrapper
+// mouseleave event is maintain the last rating that was clicked 
+// click event is to set the rating back to 0
+addWrapperEvents() {
+  this.wrapper.addEventListener('mouseleave', () => {
+    this.totalRating.fill(false)
+    this.defaultRating !== 0 && this.totalRating.fill(true, 0, this.defaultRating)
+    this.fillStars()
   })
 
-  wrapper.addEventListener('mouseup', () => {
-    setDefaultRating(-1)
-    fillStars()
+  this.wrapper.addEventListener('mouseup', () => {
+    this.setDefaultRating(-1)
+    this.fillStars()
   })
 }
 
-initStars()
-fillStars()
-addStarEvents()
-addWrapperEvents()
+}

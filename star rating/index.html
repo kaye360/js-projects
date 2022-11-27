@@ -7,16 +7,26 @@
   <title>Document</title>
   <link rel="stylesheet" href="main.css">
   <script src="scripts.js" defer></script>
+  <script>
+    window.onload = () => {
+      const ratingStars1 = new RatingStars('star-rating1', 'wrapper1')
+      const ratingStars2 = new RatingStars('star-rating2', 'wrapper2')
+      const ratingStars3 = new RatingStars('star-rating3', 'wrapper3')
+    }
+  </script>
 </head>
 <body>
 
-  <div class="wrapper">
+  <div class="wrapper1">
+    <div class="star-rating1"></div>
+  </div>
 
+  <div class="wrapper2">
+    <div class="star-rating2"></div>
+  </div>
 
-    <div class="star-rating"></div>
-    
-    <div class="star-rating"></div>
-
+  <div class="wrapper3">
+    <div class="star-rating3"></div>
   </div>
   
 </body>

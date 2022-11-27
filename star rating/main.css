@@ -16,25 +16,45 @@ body {
   background-color: #eee;
 }
 
-.wrapper {
+.wrapper1, .wrapper2, .wrapper3 {
   padding : 1rem;
   border : 1px solid #333;
 }
 
-.star-rating {
+.wrapper2 {
+  transform: rotate(30deg);
+}
+
+/* Below is the bare minimum css */
+
+.star-rating1 {
+  display : flex;
+  gap : 1rem;
+}
+
+.star-rating2 {
   display : flex;
   gap : 0.5rem;
-  
+  transform: scale(2);
+}
+
+.star-rating3 {
+  display : flex;
+  flex-direction: column;
+  gap : 1rem;
 }
 
 .star-btn {
-  position: relative;
-  z-index: 999;
   width : 20px;
   height : 20px;
   border : 0;
   outline : 0;
   cursor : pointer;
+}
+
+.star-empty, .star-full {
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .star-empty {
