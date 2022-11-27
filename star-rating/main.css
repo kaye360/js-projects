@@ -22,7 +22,7 @@ body {
 }
 
 .wrapper2 {
-  transform: rotate(30deg);
+  border : 1px solid firebrick;
 }
 
 /* Below is the bare minimum css */
