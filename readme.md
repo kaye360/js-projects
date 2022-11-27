@@ -1,4 +1,4 @@
-## Just some vanilla js practice projects
+## Just some vanilla js practice projects and reusable components
 
 All projects are from scratch
 
