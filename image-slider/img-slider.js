@@ -190,13 +190,11 @@ class ImgSlider {
   // 
   // Checker Functions
   isAtEnd() {
-    if(this.currentPosition === this.imgNodeList.length) return true
-    return false
+    return this.currentPosition === this.imgNodeList.length
   }
 
   isAtStart() {
-    if(this.currentPosition === 1) return true
-    return false
+    return this.currentPosition === 1
   }
 }
 
