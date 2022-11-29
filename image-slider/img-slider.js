@@ -4,9 +4,8 @@
 class ImgSlider {
   
   // Config
-  imgCoverMode
-  transitionTime = 3500
-  progressBarColor
+  transitionTime = 2000
+  progressBarColor = 'hsla(231, 33%, 24%, 0.3)'
   imgDir = './img/'
   imgList =[
     'diego-ph-fIq0tET6llw-unsplash.jpg',
@@ -41,22 +40,14 @@ class ImgSlider {
       this.prevButton.addEventListener('click', () => this.slidePrev() )
 
       this.pauseButton = document.querySelector('.img-slider-pause')
-      this.pauseButton.addEventListener('click',  () => {
-          clearInterval(this.sliderInterval)
-          this.sliderInterval = false
-          this.pauseButton.style.display = 'none'
-          this.playButton.style.display = 'block'
-      } )
+      this.pauseButton.addEventListener('click',  () => { this.pauseSlideShow() } )
       
       this.playButton = document.querySelector('.img-slider-play')
-      this.playButton.addEventListener('click', () => {
-          this.startSlideshow()
-          this.pauseButton.style.display = 'block'
-          this.playButton.style.display = 'none'
-      })
+      this.playButton.addEventListener('click', () => { this.startSlideshow() })
 
       this.imgNodeList = document.querySelectorAll('.img-slider-img-wrapper')
       
+      this.startSlideshow()
   }
   
   // 
@@ -92,6 +83,7 @@ class ImgSlider {
   renderProgressBarHTML() {
     this.slider.insertAdjacentHTML('beforeend', this.progressBarHTML())
     this.progressBar = document.querySelector('.img-slider-progress-bar')
+    this.progressBar.style.backgroundColor = this.progressBarColor
   }
 
   // 
@@ -161,17 +153,27 @@ class ImgSlider {
     this.updateProgressBar()
   }
 
+  // 
+  // Pause Slideshow
+  pauseSlideShow() {
+    clearInterval(this.sliderInterval)
+    this.sliderInterval = false
+    this.pauseButton.style.display = 'none'
+    this.playButton.style.display = 'block'
+  }
+
   startSlideshow() {
       
     //Prevent stacking multiple setIntervals
-    if(this.slideshow) return
+    if(this.sliderInterval) return
 
-    this.slideshow = setInterval( () => {
-
+    this.sliderInterval = setInterval( () => {
         if(this.isAtEnd()) this.currentPosition = 0
-
         this.slideNext()
-    }, 3500 )
+    }, this.transitionTime )
+
+    this.pauseButton.style.display = 'block'
+    this.playButton.style.display = 'none'
   }
   
   updateProgressBar() {
@@ -185,7 +187,8 @@ class ImgSlider {
     this.progressBar.style.width = width + '%'
   }
 
-
+  // 
+  // Checker Functions
   isAtEnd() {
     if(this.currentPosition === this.imgNodeList.length) return true
     return false
@@ -196,7 +199,6 @@ class ImgSlider {
     return false
   }
 }
-
 
 const slider = new ImgSlider()
 

@@ -3,21 +3,11 @@
 
 Created by Josh - joshkaye.ca
 Simple Star Rating component that can be reused multiple times
-simply create a new instance with a corresponding star container element and wrapper element
 
-JS:
-  window.onload = () => {
-    const ratingStars1 = new RatingStars('star-rating1', 'wrapper1')
-    const ratingStars2 = new RatingStars('star-rating2', 'wrapper2')
-  }
-HTML:
-  <div class="wrapper1">
-    <div class="star-rating1"></div>
-  </div>
+Simply create a new instance with a corresponding star container element and wrapper element
 
-  <div class="wrapper2">
-    <div class="star-rating2"></div>
-  </div>
+View the Readme for more info
+
 */
 
 class RatingStars {
