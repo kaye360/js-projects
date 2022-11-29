@@ -20,10 +20,11 @@
 
 
 
-.img-slider-outer {
+.img-slider {
   position: relative;
 
   width: 100%;
+  max-width: 800px;
   height: 90vh;
   margin : 0 auto;
   padding-bottom : 10px;
@@ -33,7 +34,7 @@
   flex-wrap: nowrap;
 }
 
-.img-slider-inner {
+.img-slider-img-wrapper {
   position: relative;
   display : flex;
   justify-content: center;
@@ -44,7 +45,7 @@
   transition: transform 350ms ease-in-out;
 }
 
-.img-slider-inner img {
+.img-slider-img-wrapper img {
   width : auto;
   height : auto;
   max-width : 100%;
@@ -54,42 +55,34 @@
 }
 
 
-.img-slider-buttons {
+.img-slider-controller {
   position : absolute;
-  inset : 0;
+  top : 50%;
+  left : 0;
+  right: 0;
+  transform: translateY(-50%);
+  display : flex;
+  justify-content: space-around;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
 }
 
-.img-slider-buttons button {
-  position: absolute;
-  padding : 1rem;
+.img-slider:hover .img-slider-controller {
+  opacity: 1;
+}
 
+.img-slider-controller button {
   background: none;
   border : 0;
   outline : 0;
+  opacity: 0.3;
   cursor: pointer;
 }
 
-.img-slider-buttons button:hover {
-  border-radius: 0.4rem;
-  background-color: hsla(0, 0%, 0%, 0.3);
+.img-slider-controller button:hover {
+  opacity: 0.5;
 }
 
-.img-slider-next {
-  right : 2rem;
-  bottom : 4rem;
-} 
-
-.img-slider-prev {
-  left : 2rem;
-  bottom : 4rem;
-} 
-
-.img-slider-pause,
-.img-slider-play {
-  bottom : 4rem;
-  left : 50%;
-  transform : translateX(-50%);
-}
 
 .img-slider-play {
   display : none;
@@ -101,7 +94,7 @@
   left : 0;
   width : 0%;
   height : 10px;
-  background-color: hsla(0, 0%, 0%, 0.3);
+  background-color: hsla(231, 33%, 24%, 0.692);
 
-  transition: width 100ms linear;
+  transition: width 100 0ms linear;
 }
