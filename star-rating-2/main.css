@@ -1,0 +1,220 @@
+* {
+  margin : 0;
+  padding : 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display : grid;
+  place-items: center;
+}
+
+
+.rating-container {
+  width : 500px;
+  height : 50vh;
+  display : flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border : 1px solid #ddd;
+}
+
+.rating {
+  --bg-star-empty : url(./star-empty.svg);
+  --bg-star-full : url(./star-full.svg);
+
+  position: relative;
+  padding : 1rem;
+  display: flex;
+  gap : 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.star {
+  width : 30px;
+  height : 30px;
+  
+  border : 0;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Default star state */
+  background-image: var(--bg-star-empty);
+}
+
+.star:hover {
+  cursor: pointer;
+}
+
+.clear {
+  display: none;
+  position: absolute;
+  left : 95%;
+  top : 50%;
+  transform: translate(0%, -50%);
+  padding : 0.3rem 0.5rem;
+
+  background: none;
+  border : 0;
+  border-radius: 5px;
+  color : #aaa;
+  cursor: pointer;
+}
+
+.clear:hover {
+  background-color: #eee;
+}
+
+.rating:hover .clear {
+  display : inline-block;
+}
+
+/* Current Rating States */
+
+.rating-1 > :where( 
+  .star:nth-child(1)
+) {
+  background-image: var(--bg-star-full);
+}
+
+.rating-2 > :where( 
+  .star:nth-child(1),
+  .star:nth-child(2)
+) {
+  background-image: var(--bg-star-full);
+}
+
+.rating-3 > :where( 
+  .star:nth-child(1),
+  .star:nth-child(2),
+  .star:nth-child(3)
+) {
+  background-image: var(--bg-star-full);
+}
+
+.rating-4 > :where( 
+  .star:nth-child(1),
+  .star:nth-child(2),
+  .star:nth-child(3),
+  .star:nth-child(4)
+) {
+  background-image: var(--bg-star-full);
+}
+
+.rating-5 > :where( 
+  .star:nth-child(1),
+  .star:nth-child(2),
+  .star:nth-child(3),
+  .star:nth-child(4),
+  .star:nth-child(5)
+) {
+  background-image: var(--bg-star-full);
+}
+
+
+/* 
+  Hover States 
+  Need to explicitly set stars before as --bg-star-full and after as --bg-star-after
+*/
+
+/* 1 star rating */
+.rating:has( > .star:nth-child(1):hover ) > 
+  :is( 
+    .star:nth-child(1) 
+  ) {
+  background-image : var(--bg-star-full);
+}
+
+.rating:has( > .star:nth-child(1):hover) > 
+  :not( 
+    .star:nth-child(1) 
+  ) {
+  background-image: var(--bg-star-empty);
+}
+
+/* 2 star rating */
+.rating:has( > .star:nth-child(2):hover ) >
+  :is( 
+      .star:nth-child(1), 
+      .star:nth-child(2)
+  ) {
+  background-image : var(--bg-star-full);
+}
+
+.rating:has( > .star:nth-child(2):hover) > 
+  :not( 
+    .star:nth-child(1),
+    .star:nth-child(2) 
+  ) {
+  background-image: var(--bg-star-empty);
+}
+
+/* 3 star rating */
+.rating:has( > .star:nth-child(3):hover ) >
+  :is( 
+    .star:nth-child(1), 
+    .star:nth-child(2),
+    .star:nth-child(3) 
+  ) {
+  background-image : var(--bg-star-full);
+}
+
+.rating:has( > .star:nth-child(3):hover ) >
+  :not( 
+    .star:nth-child(1), 
+    .star:nth-child(2),
+    .star:nth-child(3) 
+  ) {
+  background-image : var(--bg-star-empty);
+}
+
+/* 4 star rating */
+.rating:has( > .star:nth-child(4):hover ) >
+  :is( 
+    .star:nth-child(1), 
+    .star:nth-child(2),
+    .star:nth-child(3), 
+    .star:nth-child(4) 
+  ) {
+  background-image : var(--bg-star-full);
+}
+
+.rating:has( > .star:nth-child(4):hover ) >
+  :not( .star:nth-child(1), 
+       .star:nth-child(2),
+       .star:nth-child(3), 
+       .star:nth-child(4) 
+  ) {
+  background-image : var(--bg-star-empty);
+}
+
+/* 5 star rating */
+.rating:has( > .star:nth-child(5):hover ) >
+  :is( 
+    .star:nth-child(1), 
+    .star:nth-child(2),
+    .star:nth-child(3), 
+    .star:nth-child(4), 
+    .star:nth-child(5) 
+  ) {
+  background-image : var(--bg-star-full);
+}
+
+.rating:has( > .star:nth-child(5):hover ) >
+  :not( 
+    .star:nth-child(1), 
+    .star:nth-child(2),
+    .star:nth-child(3), 
+    .star:nth-child(4), 
+    .star:nth-child(5) 
+  ) {
+  background-image : var(--bg-star-empty);
+}
+
+.rating:has( > .star:hover ) > :is( .clear ) {
+  background: none !important;
+}
