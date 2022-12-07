@@ -24,7 +24,7 @@ class RatingStar {
   // User selected rating
   currentRating = 0
   
-  constructor(starClassName='rating1') {
+  constructor(starClassName) {
 
     this.starClassName = starClassName
     this.ratingWrapper = document.querySelector(`.${starClassName}`)
