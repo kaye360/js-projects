@@ -1,5 +1,7 @@
 # Star rating component
 
+## V2 is much better, check that one out. It uses mostly css
+
 Can be easily used multiple times on the same page if needed
 
 Instantiate JS like this
