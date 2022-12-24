@@ -1,0 +1,1 @@
+Column style hover accordion
