@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+  margin : 0;
+  padding : 0;
+  box-sizing: border-box;
+  font-family: Poppins;
+  color : rgb(162, 203, 238);
+}
+
+body {
+  height : 100vh;
+  padding : 1rem;
+  background: rgb(28,68,103);
+  background: radial-gradient(circle, rgba(28,68,103,1) 0%, rgba(12,18,42,1) 100%);
+  overflow: hidden;
+}
+
+#tictactoe {
+  position : relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 25vh 60vh;
+  width : min-content;
+  margin-inline : auto;
+}
+
+#scoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap : 1rem;
+  padding : 1rem;
+  text-align: center;
+}
+
+#scoreboard h1 {
+  font-size: 2rem;
+  min-height: 3rem;
+}
+
+#reset-game {
+  padding : 1rem;
+  width : fit-content;
+  background: transparent;
+  color :rgb(162, 203, 238);
+  cursor : pointer;
+}
+
+#winner {
+  font-size: 3rem;
+}
+
+#game {
+  display : grid;
+  grid-template-columns: repeat(3, 200px);
+  justify-content: center;
+  gap : 1rem;
+}
+
+.twist {
+  animation: twist ease-in-out 5s;
+}
+
+@keyframes twist {
+  from { scale : 1; }
+  50% { scale : 0.2; }
+  to { rotate: 3600deg; }
+}
+
+#game button {
+  width : 200px;
+  height : 200px;
+  display : grid;
+  align-items: center;
+  border : 0;
+  outline : 0;
+  font-size : 100px;
+  background: rgba(11, 28, 43, 0.5);
+  border : 1px solid rgba(37, 90, 136, 0.5);
+  border-radius : 10px;
+  cursor : pointer;
+  overflow : hidden;
+  text-transform: uppercase;
+}
+
+#game button:hover {
+  background: rgba(11, 28, 43, 0.8);
+}
+
+.already-played {
+  animation: already-played 500ms ease-in-out both;
+}
+
+@keyframes already-played {
+  from {
+    background-color: hsl(0, 96%, 67%);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.square-played {
+  animation : square-played 500ms ease-in-out both ;
+  animation-iteration-count: 1;
+}
+
+@keyframes square-played {
+  to { rotate: y 180deg; }
+}
+
+.square-end-game {
+  animation-name : square-end-game;
+  animation-timing-function:  ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.square-end-game:nth-child(1) { animation-duration: 20s; }
+.square-end-game:nth-child(2) { animation-duration: 50s; }
+.square-end-game:nth-child(3) { animation-duration: 8s; }
+.square-end-game:nth-child(4) { animation-duration: 15s; }
+.square-end-game:nth-child(5) { animation-duration: 30s; }
+.square-end-game:nth-child(6) { animation-duration: 5s; }
+.square-end-game:nth-child(7) { animation-duration: 100s; }
+.square-end-game:nth-child(8) { animation-duration: 25s; }
+.square-end-game:nth-child(9) { animation-duration: 45s; }
+
+@keyframes square-end-game {
+  to { rotate: 1 1 1 360deg; }
+}
+
+
+
+
+#line {
+  position : absolute;
+  bottom : 0;
+  left : 2%;
+  z-index : 10;
+  width : 95%;
+  height : 15px;
+  background-color: rgba(62, 150, 228, 0.6);;
+  border-radius: 2px;
+  display : none;
+
+  transform-origin: left;
+  animation : line-row 1s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+
+@keyframes line-row {
+  from {
+    max-width : 0px;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    max-width : 600px;
+  }
+}
+
+.line-visible { display : block !important }
+
+
+.line-r1 { translate : 5px -440px; }
+.line-r2 { translate : 0 -230px; }
+.line-r3 { translate : 0 -20px; }
+
+.line-c1 { rotate : 90deg; translate : 90px -528px; }
+.line-c2 { rotate : 90deg; translate : 300px -528px; }
+.line-c3 { rotate : 90deg; translate : 520px -528px; }
+
+.line-tl-br { rotate : 45deg;  translate : 50px -480px; scale: 1.2; }
+.line-tr-bl { rotate : -45deg; translate : 50px 25px; scale: 1.2; }

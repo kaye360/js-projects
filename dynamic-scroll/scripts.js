@@ -15,7 +15,7 @@ class ContentLoader {
 
   // data from json file
   // Array of array of objects
-  // Each inner area has numOfEntries amount of entries and represents a section
+  // Each inner array has numOfEntries amount of entries and represents a section
   data = []
 
   // Load more button

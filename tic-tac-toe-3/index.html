@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe V3</title>
+  <link rel="stylesheet" href="main.css">
+  <script type="module">
+    import {TicTacToe} from "./app.js"
+    const game = new TicTacToe('game')
+  </script>
+</head>
+<body>
+
+<div id="tictactoe">
+
+  <div id="scoreboard">
+    <h1>Tic Tac Toe Twist!</h1>
+    <h2 id="game-status">Game in Progress</h2>
+    <div id="turn">Turn: <span id="turn-player"></span></div>
+    <button id="reset-game">Reset</button>
+    <div id="winner"></div>
+  </div>
+
+  <div id="game"></div>
+  
+  <div id="line"></div>
+
+</div>  
