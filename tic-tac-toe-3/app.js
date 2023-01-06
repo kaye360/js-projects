@@ -65,6 +65,8 @@ export class TicTacToe {
 
   twist() {
 
+    this.scoreBoard.setGameStatus('Twisting...')
+
     this.gameEL.classList.add('twist')
     setTimeout( () => this.gameEL.classList.remove('twist'), 5000 )
 
@@ -84,6 +86,8 @@ export class TicTacToe {
         this.takeTurn(this.squareList[index])
       })
     })
+
+    setTimeout( () => this.scoreBoard.setGameStatus('Game in Progress'), 5000 )
   }
 
   reset() {
