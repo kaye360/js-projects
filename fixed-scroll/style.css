@@ -1,0 +1,12 @@
+
+
+section {
+    display : grid;
+    align-items: center;
+    min-height : 100vh;
+    padding-inline: 5vw;
+}
+
+#fixed-item img {
+    scale : 0.5;
+}

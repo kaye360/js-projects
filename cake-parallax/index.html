@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake Parallax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial" rel="stylesheet">
+
+
+<style>
+* {
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family : Questrial;
+    color : #5F3267;
+}
+
+body {
+    padding-top : 100vh;
+}
+
+h1 {
+    position: absolute;
+    top : 40%;
+    left : 10%;
+    z-index: 20;
+    transform: translateY(-50%);
+    font-size : 2rem;
+    pointer-events: none;
+}
+
+h1 span {
+    font-size : 3.5rem;
+}
+
+.hero-circle {
+    position: absolute;
+    top : 55%;
+    left : 5%;
+    z-index: 20;
+    transition: all 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.hero-image {
+    position: absolute;
+    top : 20vh;
+    left : 40vw;
+    z-index: 2;
+    height: 90vh;
+    object-fit:fill;
+} 
+
+.hero-bg {
+    position: absolute;
+    inset : 0 0 auto 0;
+    width : 100%;
+    height : 100vh;
+    z-index: 1;
+}
+
+section {
+    min-height: 100vh;
+    display : grid;
+    place-content: center;
+    padding : 5rem;
+}
+
+section:nth-of-type(1) { background-color: skyblue; }
+section:nth-of-type(2) { background-color: slategrey; }
+section:nth-of-type(3) { background-color: lightsalmon; }
+section:nth-of-type(4) { background-color: lightgreen; }
+
+.petals {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+}
+
+.petal {
+    position: fixed;
+    transition: all 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.75;
+    transform: scale(0.7);
+}
+
+.petal-1 {
+    top : 50%;
+    left : 10%;
+}
+
+.petal-2 {
+    top : 10%;
+    left : 80%;
+}
+
+.petal-3 {
+    top : 80%;
+    left : 50%;
+}
+
+.petal-4 {
+    top : 20%;
+    left : 40%;
+}
+
+.petal-5 {
+    top : 5%;
+    left : 5%;
+}
+
+.petal-6 {
+    top : 70%;
+    left : 80%;
+}
+
+.petal-7 {
+    top : 90%;
+    left : 15%;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+    
+<h1>
+    Custom, handcrafted <br>
+    <span>Wedding Cakes</span> <br>
+    for your big day
+</h1>
+
+<img src="circle.png" class="hero-circle" >
+
+<img src="cake_shadow.png" class="hero-image">
+
+<img src="bg.png" class="hero-bg">
+
+<section></section>
+<section></section>
+<section></section>
+<section></section>
+<section></section>
+
+
+<div class="petals">
+
+    <img src="petal1.png" class="petal petal-3">
+    <img src="petal2.png" class="petal petal-4">
+    <img src="petal2.png" class="petal petal-5">
+    <img src="petal3.png" class="petal petal-6">
+    <img src="petal3.png" class="petal petal-7">
+
+</div>
+
+
+<script>
+    
+    
+function parallax(className, speed) {
+    const el = document.querySelector(className)
+    if( !el ){
+        console.warn(`Warning: Element with class name ${className} not found.`)
+        return
+    }
+    const scrollAmount = `-${scrollY * speed}px`
+    el.style.transform = `translateY(${scrollAmount}) scale(0.7)`
+}
+
+function spin(className, speed) {
+    const el = document.querySelector(className)
+    if( !el ){
+        console.warn(`Warning: Element with class name ${className} not found.`)
+        return
+    }
+    const spinAmount = `${scrollY * speed * .1}deg`
+    el.style.transform = `rotate(${spinAmount})`
+}
+
+
+
+window.addEventListener('scroll', () => {
+    if(scrollY > 1000) return
+    parallax('.petal-1', 0.5)
+    parallax('.petal-2', 0.4)
+    parallax('.petal-3', 0.7)
+    parallax('.petal-4', 0.4)
+    parallax('.petal-5', 0.7)
+    parallax('.petal-6', 0.8)
+    parallax('.petal-7', 1)
+    spin('.hero-circle', 2)
+})
+    
+</script>
+
+
+
+
+</body>
+</html>
