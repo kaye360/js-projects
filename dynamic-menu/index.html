@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <style>
+
+        /* 
+            Note: mobile media query breakpoint must also be the same in javascript
+        */
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin : 0;
+            padding : 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+
+        /* Header */
+
+        .wrapper {
+            position: sticky;
+            top : 0;
+            margin-inline: auto;
+            width : 100%;
+            background-color: darkslateblue;
+            color : white;
+        }
+
+        .logo-line-1 {
+            display : block;
+            font-weight: bold;
+            text-align: center;
+            padding-block : 2rem;
+        }
+
+
+        /* Nav General */
+
+        nav.nav-wrapper {
+            position : absolute;
+            bottom : 2px;
+            right : 0;
+            display : flex;
+            gap : 1rem;
+            align-items: center;
+            width : fit-content;
+            margin-inline: auto;
+            font-size: 22px;
+        }
+
+        @media screen and (min-width : 400px) {
+            nav.nav-wrapper {
+                position: static;
+                padding-inline: 1rem;
+            }
+        }
+
+
+        /* Nav Links */
+
+        ul.nav-links {
+            display : flex;
+            column-gap : 2rem;
+            width : fit-content;
+            margin-inline: auto;
+        }
+
+        ul.nav-links li {
+            min-width: max-content;
+        }
+
+
+        /* Dropdown Buttons */
+
+        .more-btn {
+            display : none;
+            background: none;
+            border : none;
+            outline: none;
+            font-size : 22px;
+            color : inherit;
+        }
+
+        @media screen and (min-width : 400px) {
+            .more-btn {
+                display : flex;
+                align-items: center;
+                gap : 4px;
+            } 
+        }
+
+        .mobile-btn {
+            display: block;
+            background: none;
+            border : none;
+            outline: none;
+            cursor: pointer;
+            padding-right : 3px;
+        }
+
+        @media screen and (min-width : 400px) {
+            .mobile-btn {
+                display : none;
+            }
+        }
+
+        .mobile-btn path {
+            transform-origin: center;
+            transition: all 500ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .mobile-menu-is-open .mobile-btn-line-1 {
+            transform: rotate(45deg) translateY(10px);
+        }
+        .mobile-menu-is-open .mobile-btn-line-2 {
+            transform: rotate(45deg) translateY(10px);
+            opacity: 0;
+        }
+        .mobile-menu-is-open .mobile-btn-line-3 {
+            transform: rotate(135deg) translateY(-3px) translateX(-2px);
+        }
+
+
+        /* Dropdown */
+
+
+        .dropdown-wrapper {
+            display : flex; 
+            align-items: centers;
+            background-color: darkslateblue;
+            position: relative;
+        }
+
+
+        .dropdown {
+            position: absolute;
+            top : 100%;
+            right : 0;
+            display : flex;
+            flex-direction: column;
+            gap : 0.75rem;
+            max-height: 0px;
+
+            overflow: hidden;
+            padding-inline: 0.75rem;
+            background-color: darkslateblue;
+            transition: all 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-wrapper:has(.more-btn:hover) .dropdown, 
+        .dropdown:hover {
+            padding-block : 0.75rem;
+            max-height: 600px;
+        }
+        
+        /** Disable mobile-menu-is-open on desktop screens */
+        @media screen and (max-width : 399px) {
+            .mobile-menu-is-open .dropdown {
+                padding-block : 0.75rem;
+                max-height: 600px;
+            }
+        }
+
+        .dropdown li {
+            width : max-content;
+        }
+
+        /* Testing */
+
+        section {
+            min-height: 100vh;
+            background: linear-gradient(skyblue, slateblue);
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+    <div class="wrapper">
+
+        <span class="logo-line-1">
+            Logo line 1
+        </span>
+
+        <nav class="nav-wrapper">
+
+            <ul class="nav-links">
+                <li>Link 1</li>
+                <li>Link 2</li>
+                <li>Link 3</li>
+                <li>Link 4</li>
+                <li>Link 5</li>
+                <li>Link 6</li>
+                <li>Link 7</li>
+                <li>Link 8</li>
+                <li>Link 9</li>
+                <li>Link 10</li>
+                <li>Link 11</li>
+                <li>Link 12</li>
+                <li>Link 13</li>
+                <li>Link 14</li>
+                <li>Link 15</li>
+            </ul>
+
+            <div class="dropdown-wrapper">
+
+                <button class="more-btn">
+                    More
+                    <svg width="19" height="11" viewBox="0 0 19 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.5 11L0.406734 0.5L18.5933 0.499998L9.5 11Z" fill="white"/>
+                    </svg>
+                        
+                        
+                </button>
+
+                <button class="mobile-btn">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="mobile-btn-line-1" d="M2 2L28 2" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <path class="mobile-btn-line-2" d="M2 10L28 10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        <path class="mobile-btn-line-3" d="M2 18L28 18" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </button>
+
+                <ul class="dropdown">
+                </ul>
+            </div>
+
+        </nav>
+
+
+    </div>
+
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
+    <section></section>
+    
+
+
+    <script src="script.js" type="application/javascript"></script>
+    <script>
+        const dynamicNav = new DynamicHorizontalNav()
+        dynamicNav.init()
+    </script>
+
+</body>
+</html>
